@@ -39,4 +39,8 @@ app.get('/movie/:id', async (request, response) => {
 
 app.use('/static', express.static('./static'));
 
-app.listen(5080);
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(5080);
+}
+
+export { app };
