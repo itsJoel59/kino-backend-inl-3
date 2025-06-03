@@ -1,4 +1,5 @@
 import express from 'express';
+import { marked } from 'marked';
 
 const app = express();
 
@@ -29,7 +30,11 @@ app.get('/movie/:id', async (request, response) => {
         }
 
         const movie = await res.json();
-        response.render('movie', { movie });
+        response.render('movie', { 
+            title:movie.data.attributes.title, 
+            image: movie.data.attributes.image.url, 
+            intro: marked(movie.data.attributes.intro) //for markdown!
+        });
 
     } catch (err) {
         console.error(err);

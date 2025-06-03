@@ -1,12 +1,12 @@
 extends layout 
 
 block content 
-    h1= movie.data.attributes.title
+    h1= title
 
-    if movie.data.attributes.image.url
-        img(src=movie.data.attributes.image.url, alt=movie.data.attributes.title, width='300')
+    if image
+        img(src=image, alt=title, width='300')
 
-    if movie.data.attributes.intro
-        p= movie.data.attributes.intro
+    if intro
+        .intro !{intro}
     
     a(href="/movies") ← Back To Movies 
