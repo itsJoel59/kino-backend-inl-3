@@ -7,5 +7,5 @@ block content
             li
                 h3 
                     a(href=`/movie/${movie.id}`) #{movie.attributes.title} 
-                if movie.image 
-                    img(src=movie.attributes.image, alt=movie.attributes.title, width='200')
+                if movie.attributes.image.url 
+                    img(src=movie.attributes.image.url, alt=movie.attributes.title, width='200')
