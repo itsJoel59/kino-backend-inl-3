@@ -39,7 +39,7 @@ app.get('/movie/:id', async (request, response) => {
 
 app.use('/static', express.static('./static'));
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') {  //Code only runs if it's not used for testing
     app.listen(5080);
 }
 
