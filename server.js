@@ -23,7 +23,7 @@ app.get('/movies', async (request, response) => {
     }
 });
 
-app.get('/movie/:id', async (request, response) => {
+app.get('/movies/:id', async (request, response) => {
     const { id } = request.params; // Same as ' const id = request.params.id; '
     try {
         const res = await fetch(`https://plankton-app-xhkom.ondigitalocean.app/api/movies/${id}`);
@@ -44,10 +44,10 @@ app.get('/movie/:id', async (request, response) => {
     }
 });
 
-app.get('/movie/:id/reviews', async (request, response) => {
+app.get('/movies/:id/reviews', async (request, response) => {
     const 
-    movieId = request.params.id, 
-    page = Number(request.query.page) || 1;
+        movieId = request.params.id, 
+        page = Number(request.query.page) || 1;
 
     try {
         const reviews = await fetchReviews(movieId, page, 5);
@@ -56,6 +56,36 @@ app.get('/movie/:id/reviews', async (request, response) => {
         console.log(err);
         response.status(502).json({error: 'Failed to fetch reviews from CMS'});
     }
+});
+
+app.post('/movies/:id/reviews', async (request, response) => {
+    const 
+        movieId = request.params.id,
+        { name, rating, comment = ''} = request.body; //destructuring request.body dvs plockar ur specifika variabler
+    
+    //Validation of review
+    if(
+        !name || typeof name !== 'string' || name.trim() === '' || 
+        typeof rating !== 'number' || rating < 0 || rating > 5
+    ) {
+        return response.status(400).json({
+            error: 'Invalid input: name and rating (0-5) is required!'
+        });
+    }
+
+    //Posting review to CMS
+    try {
+        const result = await postReview(
+            movieId, 
+            name.trim(), 
+            rating, 
+            comment.trim());
+        response.status(201).json(result);
+    } catch (err) {
+        console.error(err);
+        response.status(502).json({error: 'Failed to post review to CMS'});
+    }
+
 });
 
 app.use('/static', express.static('./static'));
