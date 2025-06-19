@@ -1,7 +1,9 @@
-import express from 'express';
+import express, { request, response } from 'express';
 import { marked } from 'marked';
+import { fetchReviews, postReview } from './cms';
 
 const app = express();
+app.use(express.json());
 
 app.set('view engine', 'pug');
 app.set('views', './templates');
@@ -39,6 +41,20 @@ app.get('/movie/:id', async (request, response) => {
     } catch (err) {
         console.error(err);
         response.status(404).render('error', { message: 'Movie not found', statusCode: 404 });
+    }
+});
+
+app.get('/movie/:id/reviews', async (request, response) => {
+    const 
+    movieId = request.params.id, 
+    page = Number(request.query.page) || 1;
+
+    try {
+        const reviews = await fetchReviews(movieId, page, 5);
+        response.json(reviews);
+    } catch (err) {
+        console.log(err);
+        response.status(502).json({error: 'Failed to fetch reviews from CMS'});
     }
 });
 
