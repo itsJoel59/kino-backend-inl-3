@@ -14,3 +14,34 @@ Fetch paginated reviews for a specific movie.
 {
     "data": [ /* array of reviews */ ]
 }
+```
+
+### POST /movies/:id/reviews
+
+This allows clients to submit reviews for a movie by ID.
+
+**Body:**
+
+```json
+{
+    "name": "Reviewer name",
+    "rating": 4,
+    "comment": "Optional comment"
+}
+```
+
+**Validation:**
+
+- `name`: non-empty string, required
+
+- `rating`: number between 0 and 5, required
+
+- `comment`: optional string
+
+**Response:**
+
+- `201 Created` on success
+
+- `400 Bad Request` on validation failure
+
+- `502 Bad Gateway` if CMS fails
