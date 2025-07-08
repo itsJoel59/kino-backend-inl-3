@@ -36,7 +36,7 @@ describe('Review routes', () => {
         expect(response.statusCode).toBe(201);
     });
 
-    test('handles CMS errors', async () => {
+    test('for handling CMS errors', async () => {
         fetch.mockResolvedValueOnce({ ok: false, status: 500, statusText: 'Error' });
 
         const response = await request(app).get('/movies/1/reviews');
