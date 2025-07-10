@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalPages = data.meta?.pagination?.pageCount || 1;
 
             if (data.data.length === 0) {
-                reviewsList.innerHTML = '<li>No reviews found.</li>';
+                reviewsList.innerHTML = '<li>No reviews yet.</li>';
             } else {
                 for (const review of data.data) {
                     const li = document.createElement('li');
