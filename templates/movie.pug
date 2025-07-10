@@ -9,4 +9,15 @@ block content
     if intro
         .intro !{intro}
     
-    a(href="/movies") ← Back To Movies 
+    section#reviews-section 
+        h2 Reviews
+        #reviews-loading Loading reviews...
+        ul#reviews-list
+            //- insert reviews dynamically
+        .pagination
+            button#prev-review(type='button' disabled) Previous
+            button#next-review(type='button' disabled) Next
+
+    a(href="/movies") ← Back To Movies
+
+    script(src='/static/reviews.js')
