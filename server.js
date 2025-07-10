@@ -33,7 +33,7 @@ app.get('/movies/:id', async (request, response) => {
 
         const movie = await res.json();
         response.render('movie', { 
-            title:movie.data.attributes.title, 
+            title: movie.data.attributes.title, 
             image: movie.data.attributes.image.url, 
             intro: marked(movie.data.attributes.intro) //for markdown!
         });
