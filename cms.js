@@ -1,4 +1,4 @@
-const CMS_BASE = 'https://plankton-app-xhkom.ondigitalocean.com.app/api';
+const CMS_BASE = 'https://plankton-app-xhkom.ondigitalocean.app/api';
 
 export async function fetchReviews(movieId, page = 1, pageSize = 5) {
     const url = new URL(`${CMS_BASE}/reviews`);

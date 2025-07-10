@@ -1,6 +1,6 @@
 import express, { request, response } from 'express';
 import { marked } from 'marked';
-import { fetchReviews, postReview } from './cms';
+import { fetchReviews, postReview } from './cms.js';
 
 const app = express();
 app.use(express.json());

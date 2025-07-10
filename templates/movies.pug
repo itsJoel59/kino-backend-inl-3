@@ -6,6 +6,6 @@ block content
         each movie in movies.data
             li
                 h3 
-                    a(href=`/movie/${movie.id}`) #{movie.attributes.title} 
+                    a(href=`/movies/${movie.id}`) #{movie.attributes.title} 
                 if movie.attributes.image.url 
                     img(src=movie.attributes.image.url, alt=movie.attributes.title, width='200')
