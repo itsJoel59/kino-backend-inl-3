@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewsList = document.getElementById('reviews-list'),
         loadingIndicator = document.getElementById('reviews-loading'),
         prevBtn = document.getElementById('prev-review'),
-        nextBtn = document.getElementById('next-review');
+        nextBtn = document.getElementById('next-review'),
+        reviewForm = document.getElementById('review-form'),
+        formMessage = document.getElementById('form-message');
 
     let 
         currentPage = 1,
@@ -57,4 +59,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     fetchReviews();
+
+    reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        formMessage.textContent = '';
+
+        const
+            name = reviewForm.name.value.trim(),
+            rating = parseFloat(reviewForm.rating.value),
+            comment = reviewForm.comment.value.trim();
+
+            reviewForm.querySelector('button[type="submit"]').disabled = true;
+            formMessage.style.color = 'black';
+            formMessage.textContent = 'Submitting your review...';
+
+            try {
+                const response = await fetch(`/movies/${movieId}/reviews`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, rating, comment }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    formMessage.style.color = 'green';
+                    formMessage.textContent = 'Review submitted successfully!';
+                    reviewForm.reset();
+                    fetchReviews(1);
+                } else {
+                    formMessage.style.color = 'red';
+                    formMessage.textContent = data.error || 'Failed to submit review.';
+                } 
+            } catch (err) {
+                    formMessage.style.color = 'red';
+                    formMessage.textContent = `Network error: ${err.message}`;
+            } finally {
+                reviewForm.querySelector('button[type="submit"]').disabled = false;
+            }
+    });
 });
