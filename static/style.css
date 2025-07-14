@@ -1,0 +1,18 @@
+#reviews-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#reviews-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.error {
+    color: red;
+}
