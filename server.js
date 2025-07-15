@@ -80,7 +80,7 @@ app.post('/movies/:id/reviews', async (request, response) => {
             name.trim(), 
             rating, 
             comment.trim());
-        response.status(201).json(result);
+        response.status(201).json({ message: 'Review submitted successfully!' });
     } catch (err) {
         console.error(err);
         response.status(502).json({error: 'Failed to post review to CMS'});

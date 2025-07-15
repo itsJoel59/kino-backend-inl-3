@@ -24,9 +24,9 @@ export async function postReview(movieId, name, rating, comment = '') {
         body: JSON.stringify({
             data: {
                 movie: movieId,
-                name,
+                author: name,
                 rating,
-                comment
+                comment,
             }
         })
     });

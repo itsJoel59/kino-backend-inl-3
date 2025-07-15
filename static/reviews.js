@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const review of data.data) {
                     const li = document.createElement('li');
                     li.textContent = 
-                    `${review.attributes.name} (${review.attributes.rating}/5): ${review.attributes.comment || ''}`;
+                    `${review.attributes.author} (${review.attributes.rating}/5): ${review.attributes.comment || ''}`;
                     reviewsList.appendChild(li);
                 }
             }
