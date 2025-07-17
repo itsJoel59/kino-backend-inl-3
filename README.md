@@ -58,9 +58,15 @@ This allows clients to submit reviews for a movie by ID.
 
 ---
 
+## Running server
+
+`npm start` (Use `npm install` first, so packages get installed.)
+
+Server runs on port 5080
+
 ## Running Tests
 
-npm test
+`npm test`
 
 Tests are written using jest and supertest. Mocks are used to simulate CMS and API.
 
